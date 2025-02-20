@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WindmillLockSystem : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] windmills;
     [SerializeField] private GameObject colorCube;
@@ -29,9 +29,13 @@ public class WindmillLockSystem : MonoBehaviour
                 isLocked[cIndex] = true;
                 lockedSpeeds[cIndex] = windmillSpeed.currentSpeed;
                 windmillSpeed.enabled = false;
-                Debug.Log("Windmühle " + cIndex + "geblockt");
+                Debug.Log("Windmühle " + cIndex + " gelocked");
             }
-            
+            else
+            {
+                Debug.Log("Windmühle " + cIndex + " kann nicht gelocked werden, weil Geschwindigkeit 0 ist.");
+                return;
+            }
 
             if (cIndex < windmills.Length - 1)
             {
@@ -60,39 +64,69 @@ public class WindmillLockSystem : MonoBehaviour
 
     private void ApplyColorToCube()
     {
-        if (colorCube != null)
+        if (colorCube == null)
         {
-            float windmillSlider1 = windmills[0].GetComponent<WindmillDynamicSpeed>().speedSlider.value;
-            float windmillSlider2 = windmills[1].GetComponent<WindmillDynamicSpeed>().speedSlider.value;
-            float windmillSlider3 = windmills[2].GetComponent<WindmillDynamicSpeed>().speedSlider.value;
-
-            colorCube.GetComponent<Renderer>().material.color = new Color(
-                Mathf.Clamp01(windmillSlider1 / 255f),
-                Mathf.Clamp01(windmillSlider2 / 255f),
-                Mathf.Clamp01(windmillSlider3 / 255f)
-            );
-            Debug.Log("Cube eingefärbt mit Farbe: " + colorCube.GetComponent<Renderer>().material.color);
+            Debug.LogError("ColorCube wurde nicht zugewiesen");
+            return;
         }
+
+        float red = 0f;
+        float green = 0f;
+        float blue = 0f;
+
+        for (int i = 0; i < windmills.Length; i++)
+        {
+            WindmillDynamicSpeed windmillSpeed = windmills[i].GetComponent<WindmillDynamicSpeed>();
+
+            if (windmillSpeed != null && windmillSpeed.speedSlider != null)
+            {
+                float sliderValue = Mathf.Clamp01(windmillSpeed.speedSlider.value / 255f);
+
+                if (i == 0)
+                {
+                    red = sliderValue;
+                }
+                if (i == 1)
+                {
+                    green = sliderValue;
+                }
+                if (i == 2)
+                {
+                    blue = sliderValue;
+                }
+            }
+        }
+
+        Color finalColor = new Color(red, green, blue);
+        colorCube.GetComponent<Renderer>().material.color = finalColor;
+        Debug.Log("Cube hat jtzt die farbe: " + finalColor);
     }
+
 
     private void ActivateCurrentWindmill()
     {
         for (int i = 0; i < windmills.Length; i++)
         {
             WindmillDynamicSpeed windmillSpeed = windmills[i].GetComponent<WindmillDynamicSpeed>();
+
             if (windmillSpeed != null)
             {
                 if (i == cIndex && !isLocked[i])
                 {
                     windmillSpeed.enabled = true;
+                    Debug.Log("Windmühle " + i + " aktiviert");
                 }
                 else
                 {
                     windmillSpeed.enabled = false;
+                    Debug.Log("Windmühle " + i + " deaktiviert");
                 }
             }
+            else
+            {
+                Debug.LogError("WindmillDynamicSpeed nicht gefunden bei: " + windmills[i].name);
+            }
         }
-        Debug.Log("Windmühle " + cIndex + " ist jetzt aktiv");
     }
 
 }
