@@ -5,7 +5,7 @@ public class WindmillDynamicSpeed : MonoBehaviour
 {
     [SerializeField] private Light lampLight; // Assign in Inspector
     [SerializeField] private float maxLightIntensity = 1f; // Maximum lamp brightness
-    [SerializeField] private Slider speedSlider; // Assign in Inspector
+    public Slider speedSlider; // Assign in Inspector
     [SerializeField] private float maxRotationSpeed = 300f; // Maximum speed
     [SerializeField] private float acceleration = 50f; // Speed increase per second
     [SerializeField] private float deceleration = 30f; // Speed decrease per second

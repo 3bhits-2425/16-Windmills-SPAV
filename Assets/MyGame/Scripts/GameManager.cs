@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class WindmillLockSystem : MonoBehaviour
 {
     [SerializeField] private GameObject[] windmills;
-    [SerializeField] private Slider[] windmillSliders;
     [SerializeField] private GameObject colorCube;
     private bool[] isLocked;
     private int cIndex = 0;
@@ -32,11 +31,7 @@ public class WindmillLockSystem : MonoBehaviour
                 windmillSpeed.enabled = false;
                 Debug.Log("Windmühle " + cIndex + "geblockt");
             }
-            else
-            {
-                Debug.Log("Windmühle " + cIndex + " kann nicht gelockt werden, da Geschwindigkeit 0 ist.");
-                return;
-            }
+            
 
             if (cIndex < windmills.Length - 1)
             {
@@ -67,10 +62,14 @@ public class WindmillLockSystem : MonoBehaviour
     {
         if (colorCube != null)
         {
+            float windmillSlider1 = windmills[0].GetComponent<WindmillDynamicSpeed>().speedSlider.value;
+            float windmillSlider2 = windmills[1].GetComponent<WindmillDynamicSpeed>().speedSlider.value;
+            float windmillSlider3 = windmills[2].GetComponent<WindmillDynamicSpeed>().speedSlider.value;
+
             colorCube.GetComponent<Renderer>().material.color = new Color(
-                Mathf.Clamp01(windmillSliders[0].value / 255f),
-                Mathf.Clamp01(windmillSliders[1].value / 255f),
-                Mathf.Clamp01(windmillSliders[2].value / 255f)
+                Mathf.Clamp01(windmillSlider1 / 255f),
+                Mathf.Clamp01(windmillSlider2 / 255f),
+                Mathf.Clamp01(windmillSlider3 / 255f)
             );
             Debug.Log("Cube eingefärbt mit Farbe: " + colorCube.GetComponent<Renderer>().material.color);
         }
@@ -85,7 +84,7 @@ public class WindmillLockSystem : MonoBehaviour
             {
                 if (i == cIndex && !isLocked[i])
                 {
-                    windmillSpeed.enabled = true;  
+                    windmillSpeed.enabled = true;
                 }
                 else
                 {
