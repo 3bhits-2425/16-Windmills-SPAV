@@ -1,24 +1,26 @@
 # 16-Windmills-SPAV
 Die Windmühlen drehen sich jetzt einzeln, und die Buttons zum Locken funktionieren. Nach dem Locken dreht sich die nächste Windmühle. Am Ende werden alle Slider-Werte genommen und der Hintergrund wird gefärbt. Den Fehler habe ich jetzt behoben.
 
-Was funktioniert jetzt:
-  •	Einzeldrehung der Windmühlen:
-      o	Alle Windmühlen drehen sich jetzt einzeln und nicht mehr gleichzeitig.
-  •	Buttons zum Locken:
-      o	Die Buttons funktionieren, um jede Windmühle einzeln zu locken.
-      o	Sobald eine Windmühle gelocked ist, dreht sich die nächste.
-  •	Farbänderung des Hintergrunds:
-      o	Wenn alle Windmühlen gelocked sind, werden die Slider-Werte genommen.
-      o	RGB-Werte werden kombiniert und damit der Hintergrund gefärbt.
-  •	Keine Arrays mehr für Slider:
-      o	Die Slider sind nicht mehr als Array festgelegt.
-      o	Jeder Slider wird direkt aus der Windmühle geholt, ohne dass man ihn vorher im Array festlegen muss.
-________________________________________
-Was noch fehlt:
-  •	Dynamische Erkennung der Windmühlen:
-      o	Im Moment benutze ich noch ein windmills[]-Array.
-      o	Ziel: Dass alle Windmühlen automatisch erkannt werden, egal wie viele ich in die Szene setze.
-      o	Dann müsste man das Array nicht mehr manuell anpassen.
+## Was funktioniert jetzt:
+- **Einzeldrehung der Windmühlen:**
+  - Alle Windmühlen drehen sich **jetzt einzeln** und nicht mehr gleichzeitig.
+- **Buttons zum Locken:**
+  - **Die Buttons funktionieren**, um **jede Windmühle einzeln zu locken**.
+  - **Sobald eine Windmühle gelocked** ist, **dreht sich die nächste**.
+- **Farbänderung des Hintergrunds:**
+  - **Wenn alle Windmühlen gelocked** sind, werden die **Slider-Werte genommen**.
+  - **RGB-Werte** werden **kombiniert** und damit **der Hintergrund gefärbt**.
+- **Keine Arrays mehr für Slider:**
+  - **Die Slider sind nicht mehr als Array** festgelegt.
+  - **Jeder Slider** wird **direkt aus der Windmühle** geholt, ohne dass man ihn **vorher im Array** festlegen muss.
+
+---
+
+## Was noch fehlt:
+- **Dynamische Erkennung der Windmühlen:**
+  - **Im Moment** benutze ich noch ein **`windmills[]`-Array**.
+  - **Ziel**: Dass **alle Windmühlen automatisch** erkannt werden, **egal wie viele** ich in die Szene setze.
+  - Dann müsste man **das Array nicht mehr manuell anpassen**.
 
 
 
